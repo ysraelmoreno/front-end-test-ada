@@ -1,181 +1,53 @@
-# Desafio Técnico - Frontend
+# Instalacao
 
-O propósito desse desafio é a criação de frontend para um quadro de kanban. Esse quadro possui listas, que contém cards.
+Para configurar o projeto do front-end, é necessário somente rodar os comandos
 
-As imagens abaixo são apenas uma ilustração da funcionalidade desejada:
-
-![](https://s3-sa-east-1.amazonaws.com/lcpi/62b90509-8792-4fb1-9aa7-240f5a22c88e.png)
-
-Com os dois primeiros cards em modo de edição:
-
-![](https://s3-sa-east-1.amazonaws.com/lcpi/64875968-b03c-49b7-9c28-4d82b73e7d51.png)
-
-Esse é um protótipo bem qualquer nota, sem estilo, nem considerações de UI e UX. 
-
-Esperamos uma qualidade bem mais alta de seu trabalho.
-
-## Rodando a API
-
-Uma API de exemplo foi disponibilizada na pasta BACK.
-
-Para rodá-la, faça:
-
-```console
-> cd BACK
-> npm install
-> npm run server
+```
+npm i
+npm run dev
 ```
 
-Ela responderá na porta 5000.
+# Sobre o projeto
 
-## Desafio
+Devido a falta de tempo e um período condizente para um projeto completo, testes unitários não foram desenvolvidos para este projeto. Mas, apenas para ressaltar, testes unitários é um critério **NO GO** para a maioria dos projetos (ou deveria ser) a serem trabalhados em qualquer empresa criteriosa no mercado.
 
-Você precisa criar um frontend de acordo com os requisitos abaixo, que deve ser desenvolvido na pasta "FRONT".
+Como todo o tipo de projeto, há melhorias a serem feitas, como por exemplo: o uso de uma lib ou desenvolvimento de uma ferramenta Drag'n'Drop como o [React DND](https://react-dnd.github.io/react-dnd/) para uma melhor interacao entre usuário e aplicacão. E também, o possivel uso de ferramentas para a edicão utilizando Markdown.
 
-Para criar seu frontend você pode escolher entre duas tecnologias:
+Pode ser feito também uma arquitetura menos acoplada nas colunas de board e definirmos uma estrutura onde a definicão de quais colunas aparecem para o usuário venha de algum CMS ou micro-servico que, a partir de um ID ou algum token, determine a permissão do usuário e quais colunas aquele board possui e ele é possibilitado de ver.
 
-1. Javascript ou Typescript + REACT
-2. Typescript + ANGULAR
+Muitissimas melhorias na UI podem serem feitas, como por exemplo, a melhoria na tela de login, melhoria em relacão as escolhas de cores e formatos.
 
 ## Requisitos
 
-**Utilização da API**
+1. ~~A API que provemos deve ser usada para persistência dos cards (ela trabalha com persistência em memória) e não deve ser alterada.~~
 
-A API que provemos nesse projeto utiliza JWT para autenticação, você deve fazer a seguinte requisição antes qualquer outra:
+2. ~~A interface gráfica será apenas uma tela, nela deve haver três colunas chamadas "To do", "Doing" e "Done".~~
 
-```
-(POST) http://0.0.0.0:5000/login/
+3. ~~Os cards deve ser listados nessas colunas de acordo com o valor do campo `lista` presente no card. Os valores de `lista` devem ser "ToDo", "Doing" e "Done", respectivamente.~~
 
-{ "login":"letscode", "senha":"lets@123"}
-```
+4. ~~Deve haver um local que permita criar um card passando valores para o `titulo` e `conteudo`, deve haver um botão para adicionar o card.~~
 
-Feita a requisição você receberá um token em formato json. Esse token deve ser enviado em todas as requisições subsequentes pelo header Authorization de acordo com o padrão JWT.
+5. ~~Um novo card deve sempre cair na lista "To Do" após persistido na API.~~
 
-```
-Authorization : 'Bearer <token>'
-```
+6. ~~O card deverá ter dois modos: Visualização e Edição.~~
 
-Lembre-se de setar os headers Accept e ContentType para json em todas as requisições...
-
----
-
-A API tem os seguintes entrypoints:
-
-```
-(GET)       http://0.0.0.0:5000/cards/
-(POST)      http://0.0.0.0:5000/cards/
-(PUT)       http://0.0.0.0:5000/cards/{id}
-(DELETE)    http://0.0.0.0:5000/cards/{id}
-```
-
----
-
-**GET** obtém uma lista de cards.
-
-A API retorna um array com o seguinte formato:
-
-```
-[
-    {
-        id:uuid
-        titulo : string, 
-        conteudo: string, 
-        lista: string
-    },
-    ...
-]
-```
-
----
-
-**POST** adiciona um novo card, passe-o pelo corpo da requisição com o seguinte formato:
-
-```
-{
-    titulo : string, 
-    conteudo: string, 
-    lista: string
-}
-```
-
-A api retornará o card completo como o id atribuído.
-
----
-
-**PUT** altera um card existente, passe o id na URL e o card completo pelo corpo da requisição de acordo com o formato:
-
-```
-{
-    id: uuid (o mesmo passado na URL)
-    titulo : string, 
-    conteudo: string, 
-    lista: string
-}
-```
-
-A api retornará o card completo que foi salvo.
-
----
-
-**DELETE** remove um card existente, passe o id na URL.
-
-A api retornará a lista dos cards que sobraram (igual ao GET).
-
-```
-[
-    {
-        id:uuid
-        titulo : string, 
-        conteudo: string, 
-        lista: string
-    },
-    ...
-]
-```
-
----
-
-**Atenção**: As rotas tem validações e retornos diferentes dependendo do resultado:
-
-> POST e PUT retornam 400 se titulo, conteudo ou lista forem avaliados como falsy.
-> 
-> PUT também retorna 400 se o id passado na URL não for igual ao do objeto passado no corpo da requisição.
-> 
-> PUT e DELETE retornam 404 se não encontrarem um card com o id passado na URL.
-> 
-> Todas as rotas retornam 401 se o token não for passado, for inválido, mal-formado ou expirado.
-
-## Requisitos
-
-1. A API que provemos deve ser usada para persistência dos cards (ela trabalha com persistência em memória) e não deve ser alterada.
-
-2. A interface gráfica será apenas uma tela, nela deve haver três colunas chamadas "To do", "Doing" e "Done". 
-
-3. Os cards deve ser listados nessas colunas de acordo com o valor do campo `lista` presente no card. Os valores de `lista` devem ser "ToDo", "Doing" e "Done", respectivamente. 
-
-4. Deve haver um local que permita criar um card passando valores para o `titulo` e `conteudo`, deve haver um botão para adicionar o card. 
-
-5. Um novo card deve sempre cair na lista "To Do" após persistido na API.
-
-6. O card deverá ter dois modos: Visualização e Edição.
-
-7. No modo de visualização o card terá um cabeçalho com seu título, o conteúdo e 4 botões.
+7. ~~No modo de visualização o card terá um cabeçalho com seu título, o conteúdo e 4 botões.~~
 
 8. O `conteudo` do card pode ser markdown, utilize uma biblioteca para renderizá-lo no modo de visualização (recomendamos uma combinação de `dompurify` e `marked`). Lembre-se de estilizar o html resultante do parse do markdown... [Se quiser usar highlight para campos de código no markdown será um diferencial].
 
-9.  Um dos botões do card deverá excluí-lo (persistindo pela API), outro colocá-lo em modo de edição.
+9. ~~Um dos botões do card deverá excluí-lo (persistindo pela API), outro colocá-lo em modo de edição.~~
 
-10. Os dois outros botões devem mudar o card para a lista anterior (se houver) ou para a lista seguinte (se houver). A decisão de desabilitar, esconder ou apenas não gerar o evento desses botões quando não houver a proxima lista ou a anterior é sua.
+10. ~~Os dois outros botões devem mudar o card para a lista anterior (se houver) ou para a lista seguinte (se houver). A decisão de desabilitar, esconder ou apenas não gerar o evento desses botões quando não houver a proxima lista ou a anterior é sua.~~
 
-11. No modo de edição, o card conterá um input para o `titulo`, um textarea para o `conteudo` e dois botões.
+11. ~~No modo de edição, o card conterá um input para o `titulo`, um textarea para o `conteudo` e dois botões.~~
 
-12. No modo de edição, um dos botões cancela a edição, quando precionado os campos devem ser resetados para o valor atual e voltar o card ao modo de visualização.
+12. ~~No modo de edição, um dos botões cancela a edição, quando precionado os campos devem ser resetados para o valor atual e voltar o card ao modo de visualização.~~
 
-13. O outro botão salva o card, persistindo as informações pela API. Também volta ao modo de visualização em seguida.
+13. ~~O outro botão salva o card, persistindo as informações pela API. Também volta ao modo de visualização em seguida.~~
 
-14. Toda decisão de visual, de UI e UX é sua. Apenas utilize uma única tela. 
+14. ~~Toda decisão de visual, de UI e UX é sua. Apenas utilize uma única tela.~~
 
-15. Se estiver usando REACT priorize componentes funcionais e hooks.
+15. ~~Se estiver usando REACT priorize componentes funcionais e hooks.~~
 
 16. O projeto deve ser colocado em um repositório GITHUB ou equivalente, estar público, e conter um readme.md que explique em detalhes qualquer comando ou configuração necessária para fazer o projeto rodar.
 
