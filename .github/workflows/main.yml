@@ -2,13 +2,16 @@ name: ChatGPT Pull Request Review
 
 on:
   pull_request:
-    branches: [ main ]
+    types: [opened, synchronize]
 
 jobs: 
-  build: 
+  hello_world_job:
     runs-on: ubuntu-latest
-  
+    name: ChatGPT explain code
     steps:
-    - uses: unsafecoerce/chatgpt-action@release/v2
-    
+      - name: ChatGPT explain code
+        uses: unsafecoerce/chatgpt-action@release/v2
+        with:
+          # The action to run, currently can be "review", "score"
+          action: review
   
