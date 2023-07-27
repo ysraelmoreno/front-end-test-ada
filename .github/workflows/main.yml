@@ -10,8 +10,5 @@ jobs:
   
     steps:
     - uses: unsafecoerce/chatgpt-action@release/v2
-    - name: ChatGPT Action
     
-    - run: yarn install
-  
   
