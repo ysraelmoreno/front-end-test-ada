@@ -42,7 +42,7 @@ function Board() {
         <BoardColumn icon={FiPlus} title="Add new task">
           <BoardCard type="add"></BoardCard>
         </BoardColumn>
-        <BoardColumn icon={FiInbox} title="To Do">
+        <BoardColumn icon={FiInbox} title="Must Do">
           {todoCards.map((card) => (
             <BoardCard
               key={card.id}
