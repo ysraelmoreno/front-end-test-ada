@@ -1,0 +1,25 @@
+- name: chatgpt-action
+  # You may pin to the exact commit or the version.
+  # uses: unsafecoerce/chatgpt-action@df5b73b6f2d8b7f16a51de0f2f3810bd320b053e
+  uses: unsafecoerce/chatgpt-action@release/v2
+  with:
+    # The action to run, currently can be "review", "score"
+    action: # optional, default is review
+    # Enable debug mode
+    debug: # optional
+    # The path filters, e.g., "src/**.py", "!dist/**", each line will be considered as one pattern.
+
+    path_filters: !**/package-lock.json
+
+
+    # The URL of the chatgpt reverse proxy, see also https://github.com/transitive-bullshit/chatgpt-api#reverse-proxy
+
+    chatgpt_reverse_proxy: # optional, default is https://chat.duti.tech/api/conversation
+    # Leave comments even the patch is LGTM
+    review_comment_lgtm: # optional
+    # The beginning prompt of a code review dialog
+    review_beginning: # optional, default is Hi ChatGPT, I have a pull request with title "$title" and the description is as follows,
+
+    scoring_beginning: # optional, default is Hi ChatGPT, I have a pull request with title "$title" and the description is as follows,
+
+    scoring: 
